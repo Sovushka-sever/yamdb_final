@@ -61,7 +61,7 @@ jobs:
         host: ${{ secrets.HOST }}
         username: ${{ secrets.USER }}
         key: ${{ secrets.SSH_KEY }}
-        source: "./docker-compose.yaml,./.env,static,templates"
+        source: "./docker-compose.yaml,./.env,./static,./templates"
         target: "./"
 
     - name: executing remote ssh commands to deploy
