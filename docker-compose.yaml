@@ -39,7 +39,7 @@ services:
       - static:/usr/share/nginx/html/static/
       - nginx_templates:/etc/nginx/templates
     ports:
-      - "8080:80"
+      - "80:80"
     depends_on:
       - yamdb
     environment:
