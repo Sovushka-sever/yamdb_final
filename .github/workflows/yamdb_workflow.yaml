@@ -27,7 +27,7 @@ jobs:
       run: pytest
 
     - name: build static
-      run: mkdir static && python manage.py collectstatic
+      run: mkdir static && python manage.py collectstatic && mv redoc.yaml static/
 
     - name: Archive production artifacts
       uses: actions/upload-artifact@v2
