@@ -26,6 +26,17 @@ jobs:
     - name: Test with pytest
       run: pytest
 
+    - name: build static
+      run: mkdir static && python manage.py collectstatic
+
+    - name: Archive production artifacts
+      uses: actions/upload-artifact@v2
+      with:
+        name: collected-static
+        retention-days: 1
+        path: |
+          static
+
   build_and_push_to_docker_hub:
     name: Push Docker image to Docker Hub
     runs-on: ubuntu-latest
@@ -34,8 +45,10 @@ jobs:
       - name: Check out the repo
         uses: actions/checkout@v2
 
-      - name: build static
-        run: mkdir static && python manage.py collectstatic
+      - name: download static
+        uses: actions/download-artifact@v2
+        with:
+          name: collected-static
 
       - name: Set up Docker Buildx
         uses: docker/setup-buildx-action@v1
